@@ -99,7 +99,9 @@
 
 /* POSIX (Portable Operating System Interface) layer */
 
+
 /* Interprocess Communication (IPC) */
+
 
 /* Socket is in the 'Network' category */
 
@@ -119,6 +121,7 @@
 /* RT-Thread online packages */
 
 /* IoT - internet of things */
+
 
 /* Wi-Fi */
 
@@ -163,22 +166,6 @@
 
 /* u8g2: a monochrome graphic library */
 
-#define U8G2_USE_HW_I2C
-#define U8G2_I2C_DEVICE_NAME "i2c1"
-#define PKG_USING_U8G2
-
-/* U8G2 Examples */
-
-/* end of U8G2 Examples */
-#define PKG_USING_U8G2_LATEST_VERSION
-
-/* C     version: v1.x.x */
-
-/* C++   version: v2.x.x */
-
-/* C/C++ version: v3.x.x */
-
-#define PKG_U8G2_VER_NUM 0x99999
 /* end of u8g2: a monochrome graphic library */
 /* end of multimedia packages */
 
@@ -244,6 +231,7 @@
 /* end of miscellaneous packages */
 
 /* Arduino libraries */
+
 
 /* Projects and Demos */
 

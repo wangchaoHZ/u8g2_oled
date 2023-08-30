@@ -17,9 +17,11 @@
 int main(void)
 {
     LOG_I("This is an u8g2 demo on rtt!");
-    LOG_I("SCL Pin: GET_PIN(B, 7)");
-    LOG_I("SDA Pin: GET_PIN(B, 6)");
+    LOG_I("SCL Pin: GET_PIN(B, 6)");
+    LOG_I("SDA Pin: GET_PIN(B, 7)");
     rt_thread_mdelay(100);
+
+
 
     return RT_EOK;
 }

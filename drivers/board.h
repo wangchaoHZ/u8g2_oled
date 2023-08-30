@@ -364,6 +364,24 @@ extern "C"
 
     /*-------------------------- ON_CHIP_FLASH CONFIG END --------------------------*/
 
+#define RTT_U8G2
+#define U8G2_USE_HW_I2C
+#define U8G2_I2C_DEVICE_NAME "i2c1"
+#define PKG_USING_U8G2
+
+/* U8G2 Examples */
+
+/* end of U8G2 Examples */
+#define PKG_USING_U8G2_LATEST_VERSION
+
+    /* C     version: v1.x.x */
+
+    /* C++   version: v2.x.x */
+
+    /* C/C++ version: v3.x.x */
+
+#define PKG_U8G2_VER_NUM 0x99999
+
 #ifdef __cplusplus
 }
 #endif
