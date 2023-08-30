@@ -6,6 +6,7 @@
 /* RT-Thread pre-include file */
 
 #define HAVE_CCONFIG_H
+#define RTT_U8G2
 #define RT_USING_LIBC
 #define RT_USING_NEWLIB
 #define _POSIX_C_SOURCE 1

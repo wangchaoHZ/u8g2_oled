@@ -19,83 +19,83 @@ extern "C"
 {
 #endif
 
-/*-------------------------- CHIP CONFIG BEGIN --------------------------*/
+    /*-------------------------- CHIP CONFIG BEGIN --------------------------*/
 
 #define CHIP_FAMILY_STM32
 #define CHIP_SERIES_STM32F1
 #define CHIP_NAME_STM32F103VE
 
-/*-------------------------- CHIP CONFIG END --------------------------*/
+    /*-------------------------- CHIP CONFIG END --------------------------*/
 
-/*-------------------------- ROM/RAM CONFIG BEGIN --------------------------*/
+    /*-------------------------- ROM/RAM CONFIG BEGIN --------------------------*/
 
-#define ROM_START              ((uint32_t)0x08000000)
-#define ROM_SIZE               (512 * 1024)
-#define ROM_END                ((uint32_t)(ROM_START + ROM_SIZE))
+#define ROM_START ((uint32_t)0x08000000)
+#define ROM_SIZE (512 * 1024)
+#define ROM_END ((uint32_t)(ROM_START + ROM_SIZE))
 
-#define RAM_START              (0x20000000)
-#define RAM_SIZE               (64 * 1024)
-#define RAM_END                (RAM_START + RAM_SIZE)
+#define RAM_START (0x20000000)
+#define RAM_SIZE (64 * 1024)
+#define RAM_END (RAM_START + RAM_SIZE)
 
-/*-------------------------- ROM/RAM CONFIG END --------------------------*/
+    /*-------------------------- ROM/RAM CONFIG END --------------------------*/
 
-/*-------------------------- CLOCK CONFIG BEGIN --------------------------*/
+    /*-------------------------- CLOCK CONFIG BEGIN --------------------------*/
 
-#define BSP_CLOCK_SOURCE                  ("HSI")
-#define BSP_CLOCK_SOURCE_FREQ_MHZ         ((int32_t)0)
-#define BSP_CLOCK_SYSTEM_FREQ_MHZ         ((int32_t)72)
+#define BSP_CLOCK_SOURCE ("HSI")
+#define BSP_CLOCK_SOURCE_FREQ_MHZ ((int32_t)0)
+#define BSP_CLOCK_SYSTEM_FREQ_MHZ ((int32_t)72)
 
-/*-------------------------- CLOCK CONFIG END --------------------------*/
+    /*-------------------------- CLOCK CONFIG END --------------------------*/
 
-/*-------------------------- UART CONFIG BEGIN --------------------------*/
+    /*-------------------------- UART CONFIG BEGIN --------------------------*/
 
-/** After configuring corresponding UART or UART DMA, you can use it.
- *
- * STEP 1, define macro define related to the serial port opening based on the serial port number
- *                 such as     #define BSP_USING_UART1
- *
- * STEP 2, according to the corresponding pin of serial port, define the related serial port information macro
- *                 such as     #define BSP_UART1_TX_PIN       "PA9"
- *                             #define BSP_UART1_RX_PIN       "PA10"
- *
- * STEP 3, if you want using SERIAL DMA, you must open it in the RT-Thread Settings.
- *                 RT-Thread Setting -> Components -> Device Drivers -> Serial Device Drivers -> Enable Serial DMA Mode
- *
- * STEP 4, according to serial port number to define serial port tx/rx DMA function in the board.h file
- *                 such as     #define BSP_UART1_RX_USING_DMA
- *
- */
+    /** After configuring corresponding UART or UART DMA, you can use it.
+     *
+     * STEP 1, define macro define related to the serial port opening based on the serial port number
+     *                 such as     #define BSP_USING_UART1
+     *
+     * STEP 2, according to the corresponding pin of serial port, define the related serial port information macro
+     *                 such as     #define BSP_UART1_TX_PIN       "PA9"
+     *                             #define BSP_UART1_RX_PIN       "PA10"
+     *
+     * STEP 3, if you want using SERIAL DMA, you must open it in the RT-Thread Settings.
+     *                 RT-Thread Setting -> Components -> Device Drivers -> Serial Device Drivers -> Enable Serial DMA Mode
+     *
+     * STEP 4, according to serial port number to define serial port tx/rx DMA function in the board.h file
+     *                 such as     #define BSP_UART1_RX_USING_DMA
+     *
+     */
 
 #define BSP_USING_UART1
-#define BSP_UART1_TX_PIN       "PA9"
-#define BSP_UART1_RX_PIN       "PA10"
+#define BSP_UART1_TX_PIN "PA9"
+#define BSP_UART1_RX_PIN "PA10"
 
-/*-------------------------- UART CONFIG END --------------------------*/
+    /*-------------------------- UART CONFIG END --------------------------*/
 
-/*-------------------------- I2C CONFIG BEGIN --------------------------*/
+    /*-------------------------- I2C CONFIG BEGIN --------------------------*/
 
-/** if you want to use i2c bus(soft simulate) you can use the following instructions.
- *
- * STEP 1, open i2c driver framework(soft simulate) support in the RT-Thread Settings file
- *
- * STEP 2, define macro related to the i2c bus
- *                 such as     #define BSP_USING_I2C1
- *
- * STEP 3, according to the corresponding pin of i2c port, modify the related i2c port and pin information
- *                 such as     #define BSP_I2C1_SCL_PIN    GET_PIN(port, pin)   ->   GET_PIN(C, 11)
- *                             #define BSP_I2C1_SDA_PIN    GET_PIN(port, pin)   ->   GET_PIN(C, 12)
- */
+    /** if you want to use i2c bus(soft simulate) you can use the following instructions.
+     *
+     * STEP 1, open i2c driver framework(soft simulate) support in the RT-Thread Settings file
+     *
+     * STEP 2, define macro related to the i2c bus
+     *                 such as     #define BSP_USING_I2C1
+     *
+     * STEP 3, according to the corresponding pin of i2c port, modify the related i2c port and pin information
+     *                 such as     #define BSP_I2C1_SCL_PIN    GET_PIN(port, pin)   ->   GET_PIN(C, 11)
+     *                             #define BSP_I2C1_SDA_PIN    GET_PIN(port, pin)   ->   GET_PIN(C, 12)
+     */
 
-/*#define BSP_USING_I2C1*/
+#define BSP_USING_I2C1
 #ifdef BSP_USING_I2C1
-#define BSP_I2C1_SCL_PIN    GET_PIN(port, pin)
-#define BSP_I2C1_SDA_PIN    GET_PIN(port, pin)
+#define BSP_I2C1_SCL_PIN GET_PIN(B, 6)
+#define BSP_I2C1_SDA_PIN GET_PIN(B, 7)
 #endif
 
 /*#define BSP_USING_I2C2*/
 #ifdef BSP_USING_I2C2
-#define BSP_I2C2_SCL_PIN    GET_PIN(port, pin)
-#define BSP_I2C2_SDA_PIN    GET_PIN(port, pin)
+#define BSP_I2C2_SCL_PIN GET_PIN(port, pin)
+#define BSP_I2C2_SDA_PIN GET_PIN(port, pin)
 #endif
 
 /*-------------------------- I2C CONFIG END --------------------------*/
@@ -300,69 +300,69 @@ extern "C"
 /*#define PHY_USING_DM9161CEP*/
 /*#define PHY_USING_DP83848C*/
 #endif
-/*-------------------------- ETH CONFIG END --------------------------*/
+    /*-------------------------- ETH CONFIG END --------------------------*/
 
-/*-------------------------- USB HOST CONFIG BEGIN --------------------------*/
+    /*-------------------------- USB HOST CONFIG BEGIN --------------------------*/
 
-/** if you want to use usb host you can use the following instructions.
- *
- * STEP 1, open usb host driver framework support in the RT-Thread Settings file
- *
- * STEP 2, define macro related to the usb host
- *                 such as    BSP_USING_USBHOST
- *
- * STEP 3, copy your usb host init function from stm32xxxx_hal_msp.c generated by stm32cubemx to the end of board.c file
- *                 such as     void HAL_HCD_MspInit(HCD_HandleTypeDef* hhcd)
- *
- * STEP 4, config your usb peripheral clock in SystemClock_Config() generated by STM32CubeMX and replace this function in board.c
- *
- * STEP 5, modify your stm32xxxx_hal_config.h file to support usb host peripherals. define macro related to the peripherals
- *                 such as     #define HAL_HCD_MODULE_ENABLED
- *
- */
+    /** if you want to use usb host you can use the following instructions.
+     *
+     * STEP 1, open usb host driver framework support in the RT-Thread Settings file
+     *
+     * STEP 2, define macro related to the usb host
+     *                 such as    BSP_USING_USBHOST
+     *
+     * STEP 3, copy your usb host init function from stm32xxxx_hal_msp.c generated by stm32cubemx to the end of board.c file
+     *                 such as     void HAL_HCD_MspInit(HCD_HandleTypeDef* hhcd)
+     *
+     * STEP 4, config your usb peripheral clock in SystemClock_Config() generated by STM32CubeMX and replace this function in board.c
+     *
+     * STEP 5, modify your stm32xxxx_hal_config.h file to support usb host peripherals. define macro related to the peripherals
+     *                 such as     #define HAL_HCD_MODULE_ENABLED
+     *
+     */
 
-/*#define BSP_USING_USBHOST*/
+    /*#define BSP_USING_USBHOST*/
 
-/*-------------------------- USB HOST CONFIG END --------------------------*/
+    /*-------------------------- USB HOST CONFIG END --------------------------*/
 
-/*-------------------------- USB DEVICE CONFIG BEGIN --------------------------*/
+    /*-------------------------- USB DEVICE CONFIG BEGIN --------------------------*/
 
-/** if you want to use usb device you can use the following instructions.
- *
- * STEP 1, open usb device driver framework support in the RT-Thread Settings file
- *
- * STEP 2 define macro related to the usb device
- *                 such as    BSP_USING_USBDEVICE
- *
- * STEP 3, copy your usb device init function from stm32xxxx_hal_msp.c generated by stm32cubemx to the end of board.c file
- *                 such as     void HAL_PCD_MspInit(PCD_HandleTypeDef* hpcd)
- *
- * STEP 4, config your usb peripheral clock in SystemClock_Config() generated by STM32CubeMX and replace this function in board.c
- *
- * STEP 5, modify your stm32xxxx_hal_config.h file to support usb device peripherals. define macro related to the peripherals
- *                 such as     #define HAL_PCD_MODULE_ENABLED
- *
- */
+    /** if you want to use usb device you can use the following instructions.
+     *
+     * STEP 1, open usb device driver framework support in the RT-Thread Settings file
+     *
+     * STEP 2 define macro related to the usb device
+     *                 such as    BSP_USING_USBDEVICE
+     *
+     * STEP 3, copy your usb device init function from stm32xxxx_hal_msp.c generated by stm32cubemx to the end of board.c file
+     *                 such as     void HAL_PCD_MspInit(PCD_HandleTypeDef* hpcd)
+     *
+     * STEP 4, config your usb peripheral clock in SystemClock_Config() generated by STM32CubeMX and replace this function in board.c
+     *
+     * STEP 5, modify your stm32xxxx_hal_config.h file to support usb device peripherals. define macro related to the peripherals
+     *                 such as     #define HAL_PCD_MODULE_ENABLED
+     *
+     */
 
-/*#define BSP_USING_USBDEVICE*/
+    /*#define BSP_USING_USBDEVICE*/
 
-/*-------------------------- USB DEVICE CONFIG END --------------------------*/
+    /*-------------------------- USB DEVICE CONFIG END --------------------------*/
 
-/*-------------------------- ON_CHIP_FLASH CONFIG BEGIN --------------------------*/
+    /*-------------------------- ON_CHIP_FLASH CONFIG BEGIN --------------------------*/
 
-/** if you want to use on chip flash you can use the following instructions.
- *
- * STEP 1 define macro related to the on chip flash
- *                 such as    BSP_USING_ON_CHIP_FLASH
- *
- * STEP 2, modify your stm32xxxx_hal_config.h file to support on chip flash peripherals. define macro related to the peripherals
- *                 such as     #define HAL_FLASH_MODULE_ENABLED
- *
- */
+    /** if you want to use on chip flash you can use the following instructions.
+     *
+     * STEP 1 define macro related to the on chip flash
+     *                 such as    BSP_USING_ON_CHIP_FLASH
+     *
+     * STEP 2, modify your stm32xxxx_hal_config.h file to support on chip flash peripherals. define macro related to the peripherals
+     *                 such as     #define HAL_FLASH_MODULE_ENABLED
+     *
+     */
 
-/*#define BSP_USING_ON_CHIP_FLASH*/
+    /*#define BSP_USING_ON_CHIP_FLASH*/
 
-/*-------------------------- ON_CHIP_FLASH CONFIG END --------------------------*/
+    /*-------------------------- ON_CHIP_FLASH CONFIG END --------------------------*/
 
 #ifdef __cplusplus
 }

@@ -1,28 +1,25 @@
 /*
- * Copyright (c) 2006-2023, RT-Thread Development Team
- *
- * SPDX-License-Identifier: Apache-2.0
- *
- * Change Logs:
- * Date           Author       Notes
- * 2023-08-30     RT-Thread    first version
+ * @Author       : wang chao
+ * @Date         : 2023-08-30 18:30:30
+ * @LastEditors  : wang chao
+ * @LastEditTime : 2023-08-30 18:37:45
+ * @FilePath     : main.c
+ * @Description  :
+ * Copyright 2023 BingShan, All Rights Reserved.
  */
 
 #include <rtthread.h>
 
 #define DBG_TAG "main"
-#define DBG_LVL DBG_LOG
+#define DBG_LVL DBG_INFO
 #include <rtdbg.h>
 
 int main(void)
 {
-    int count = 1;
-
-    while (count++)
-    {
-        LOG_D("Hello RT-Thread!");
-        rt_thread_mdelay(1000);
-    }
+    LOG_I("This is an u8g2 demo on rtt!");
+    LOG_I("SCL Pin: GET_PIN(B, 7)");
+    LOG_I("SDA Pin: GET_PIN(B, 6)");
+    rt_thread_mdelay(100);
 
     return RT_EOK;
 }
