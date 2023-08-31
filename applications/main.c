@@ -21,7 +21,8 @@ int main(void)
     LOG_I("SDA Pin: GET_PIN(B, 7)");
     rt_thread_mdelay(100);
 
-
+    extern void u8g2_show(void);
+    u8g2_show();
 
     return RT_EOK;
 }
