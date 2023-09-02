@@ -262,7 +262,7 @@ static const uint8_t u8x8_st7567_jlx12864_init_seq[] = {
     U8X8_C(0x24),
     U8X8_C(0x81),
     U8X8_C(0x25),
-    U8X8_C(0xa0),
+    U8X8_C(0xa2),
     U8X8_C(0xc8),
     U8X8_C(0xa0),
     U8X8_C(0x40),
@@ -302,16 +302,12 @@ static const uint8_t u8x8_st7567_jlx12864g_6053_pn_init_seq[] = {
     U8X8_START_TRANSFER(), /* enable chip, delay is part of the transfer start */
     U8X8_C(0xe2),
     U8X8_DLY(50),
-    U8X8_C(0x2c),
-    U8X8_DLY(50),
-    U8X8_C(0x2e),
-    U8X8_DLY(50),
     U8X8_C(0x2f),
     U8X8_DLY(50),
     U8X8_C(0x24),
     U8X8_C(0x81),
     U8X8_C(0x25),
-    U8X8_C(0xa0),
+    U8X8_C(0xa2),
     U8X8_C(0xc8),
     U8X8_C(0xa0),
     U8X8_C(0x40),
@@ -412,10 +408,10 @@ uint8_t u8g2_Setup_st7567_jlx12864g_6053_pn(u8x8_t *u8x8, uint8_t msg, uint8_t a
         u8x8_cad_SendSequence(u8x8, u8x8_st7567_jlx12864g_6053_pn_init_seq);
         break;
     case U8X8_MSG_DISPLAY_SET_POWER_SAVE:
-        if (arg_int == 0)
-            u8x8_cad_SendSequence(u8x8, u8x8_d_st7567_132x64_powersave0_seq);
-        else
-            u8x8_cad_SendSequence(u8x8, u8x8_d_st7567_132x64_powersave1_seq);
+        // if (arg_int == 0)
+        //     u8x8_cad_SendSequence(u8x8, u8x8_d_st7567_132x64_powersave0_seq);
+        // else
+        //     u8x8_cad_SendSequence(u8x8, u8x8_d_st7567_132x64_powersave1_seq);
         break;
     case U8X8_MSG_DISPLAY_SET_FLIP_MODE:
         if (arg_int == 0)

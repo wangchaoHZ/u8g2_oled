@@ -2,7 +2,7 @@
  * @Author       : wang chao
  * @Date         : 2023-08-30 19:09:32
  * @LastEditors  : wang chao
- * @LastEditTime : 2023-09-02 22:13:48
+ * @LastEditTime : 2023-09-03 07:24:49
  * @FilePath     : u_oled.c
  * @Description  :
  * Copyright 2023 BingShan, All Rights Reserved.
@@ -52,10 +52,10 @@ void u8g2_show(void)
     u8g2_ClearBuffer(&u8g2);
     u8g2_SetFont(&u8g2, u8g2_font_crox1cb_mf);
 
-    u8g2_DrawStr(&u8g2, 20, 16, "FunctionA");
-    u8g2_DrawStr(&u8g2, 20, 32, "FunctionB");
-    u8g2_DrawStr(&u8g2, 20, 48, "FunctionC");
-    u8g2_DrawStr(&u8g2, 20, 64, "FunctionD");
+    u8g2_DrawStr(&u8g2, 10, 16, "FunctionA");
+    u8g2_DrawStr(&u8g2, 10, 32, "FunctionB");
+    u8g2_DrawStr(&u8g2, 10, 48, "FunctionC");
+    u8g2_DrawStr(&u8g2, 10, 64, "FunctionD");
 
     u8g2_SendBuffer(&u8g2);
 
