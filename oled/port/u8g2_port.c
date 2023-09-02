@@ -86,8 +86,18 @@ uint8_t u8x8_gpio_and_delay_rtthread(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int,
 
     case U8X8_MSG_GPIO_AND_DELAY_INIT:
         // set i2c pin mode
-        rt_pin_mode(u8x8->pins[U8X8_PIN_I2C_DATA], PIN_MODE_OUTPUT);
-        rt_pin_mode(u8x8->pins[U8X8_PIN_I2C_CLOCK], PIN_MODE_OUTPUT);
+        // rt_pin_mode(u8x8->pins[U8X8_PIN_I2C_DATA], PIN_MODE_OUTPUT);
+        // rt_pin_mode(u8x8->pins[U8X8_PIN_I2C_CLOCK], PIN_MODE_OUTPUT);
+
+        // set spi pin mode
+        rt_pin_mode(u8x8->pins[U8X8_PIN_SPI_CLOCK], PIN_MODE_OUTPUT);
+        rt_pin_mode(u8x8->pins[U8X8_PIN_SPI_DATA], PIN_MODE_OUTPUT);
+        rt_pin_mode(u8x8->pins[U8X8_PIN_RESET], PIN_MODE_OUTPUT);
+        rt_pin_mode(u8x8->pins[U8X8_PIN_DC], PIN_MODE_OUTPUT);
+        rt_pin_mode(u8x8->pins[U8X8_PIN_CS], PIN_MODE_OUTPUT);
+
+        rt_pin_write(u8x8->pins[U8X8_PIN_CS], 0);
+        rt_pin_write(u8x8->pins[U8X8_PIN_DC], 0);
         break;
 
     case U8X8_MSG_DELAY_I2C:
