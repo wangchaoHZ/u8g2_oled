@@ -1,4 +1,13 @@
 /*
+ * @Author       : wang chao
+ * @Date         : 2023-08-30 18:30:30
+ * @LastEditors  : wang chao
+ * @LastEditTime : 2023-10-16 21:12:31
+ * @FilePath     : board.c
+ * @Description  :
+ * Copyright 2023 BingShan, All Rights Reserved.
+ */
+/*
  * Copyright (c) 2006-2023, RT-Thread Development Team
  *
  * SPDX-License-Identifier: Apache-2.0
@@ -18,10 +27,13 @@ RT_WEAK void rt_hw_board_init()
 
     /* Heap initialization */
 #if defined(RT_USING_HEAP)
-    rt_system_heap_init((void *) HEAP_BEGIN, (void *) HEAP_END);
+    rt_system_heap_init((void *)HEAP_BEGIN, (void *)HEAP_END);
 #endif
 
     hw_board_init(BSP_CLOCK_SOURCE, BSP_CLOCK_SOURCE_FREQ_MHZ, BSP_CLOCK_SYSTEM_FREQ_MHZ);
+
+    __HAL_RCC_AFIO_CLK_ENABLE();
+    __HAL_AFIO_REMAP_SWJ_NOJTAG();
 
     /* Set the shell console output device */
 #if defined(RT_USING_DEVICE) && defined(RT_USING_CONSOLE)
@@ -32,5 +44,4 @@ RT_WEAK void rt_hw_board_init()
 #ifdef RT_USING_COMPONENTS_INIT
     rt_components_board_init();
 #endif
-
 }

@@ -2,7 +2,7 @@
  * @Author       : wang chao
  * @Date         : 2023-08-30 19:09:32
  * @LastEditors  : wang chao
- * @LastEditTime : 2023-09-03 07:24:49
+ * @LastEditTime : 2023-10-16 22:44:10
  * @FilePath     : u_oled.c
  * @Description  :
  * Copyright 2023 BingShan, All Rights Reserved.
@@ -22,11 +22,11 @@
 #ifdef USING_ST7567_SPI_12864S
 
 // SW Pins 定义
-#define OLED_SPI_PIN_CLK GET_PIN(A, 7)  // PA7
-#define OLED_SPI_PIN_MOSI GET_PIN(A, 6) // PA6
-#define OLED_SPI_PIN_RES GET_PIN(A, 2)  // PA2
-#define OLED_SPI_PIN_DC GET_PIN(A, 1)   // PA1
-#define OLED_SPI_PIN_CS GET_PIN(A, 0)   // PA0
+#define OLED_SPI_PIN_CLK GET_PIN(B, 7)  // PA7
+#define OLED_SPI_PIN_MOSI GET_PIN(B, 6) // PA6
+#define OLED_SPI_PIN_RES GET_PIN(B, 4)  // PA2
+#define OLED_SPI_PIN_DC GET_PIN(B, 3)   // PA1
+#define OLED_SPI_PIN_CS GET_PIN(B, 5)   // PA0
 
 void u8g2_show(void)
 {
@@ -50,36 +50,72 @@ void u8g2_show(void)
 #endif
 
     u8g2_ClearBuffer(&u8g2);
-    u8g2_SetFont(&u8g2, u8g2_font_crox1cb_mf);
+    u8g2_SetFont(&u8g2, usa);
 
-    u8g2_DrawStr(&u8g2, 10, 16, "FunctionA");
-    u8g2_DrawStr(&u8g2, 10, 32, "FunctionB");
-    u8g2_DrawStr(&u8g2, 10, 48, "FunctionC");
-    u8g2_DrawStr(&u8g2, 10, 64, "FunctionD");
+    u8g2_DrawUTF8(&u8g2, 6, 16, "CH1: 充电 2.4A");
+    u8g2_DrawUTF8(&u8g2, 6, 36, "CH2: 放电 1.5A");
+    u8g2_DrawUTF8(&u8g2, 6, 56, "CH3: 静置");
+
+    // u8g2_DrawStr(&u8g2, 0, 32, "FunctionB");
+    // u8g2_DrawStr(&u8g2, 0, 48, "FunctionC");
+    // u8g2_DrawStr(&u8g2, 0, 64, "FunctionD");
 
     u8g2_SendBuffer(&u8g2);
 
-    for (rt_uint8_t loop = 0; loop < 2000; loop++)
-    {
-        index++;
-        LOG_W("select index = %d", index);
-        u8g2_ClearBuffer(&u8g2);
-        u8g2_DrawStr(&u8g2, 8, index * 16 - 1, ">");
+    rt_pin_mode(GET_PIN(D, 1), PIN_MODE_OUTPUT);
+    rt_pin_mode(GET_PIN(D, 3), PIN_MODE_OUTPUT);
+    rt_pin_mode(GET_PIN(D, 5), PIN_MODE_OUTPUT);
 
-        u8g2_DrawStr(&u8g2, 20, 16, "FunctionA");
-        u8g2_DrawStr(&u8g2, 20, 32, "FunctionB");
-        u8g2_DrawStr(&u8g2, 20, 48, "FunctionC");
-        u8g2_DrawStr(&u8g2, 20, 64, "FunctionD");
+    rt_pin_mode(GET_PIN(E, 8), PIN_MODE_INPUT_PULLUP);
+    rt_pin_mode(GET_PIN(B, 2), PIN_MODE_INPUT_PULLUP);
 
-        u8g2_SendBuffer(&u8g2);
+    // while (1)
+    // {
+    //     if (rt_pin_read(GET_PIN(E, 8)) == 0)
+    //     {
+    //         LOG_I("DI1-Input");
+    //     }
+    //     if (rt_pin_read(GET_PIN(B, 2)) == 0)
+    //     {
+    //         LOG_I("DI2-Input");
+    //     }
+    //     rt_thread_mdelay(200);
+    // }
 
-        if (index == 4)
-        {
-            index = 0;
-            u8g2_ClearBuffer(&u8g2);
-        }
-        rt_thread_mdelay(1000);
-    }
+    //    for (rt_uint8_t loop = 0; loop < 2000; loop++)
+    //    {
+    //        index++;
+    //        LOG_W("select index = %d", index);
+    //        u8g2_ClearBuffer(&u8g2);
+    //        u8g2_DrawStr(&u8g2, 8, index * 16 - 1, ">");
+    //
+    //        u8g2_DrawStr(&u8g2, 20, 16, "FunctionA");
+    //        u8g2_DrawStr(&u8g2, 20, 32, "FunctionB");
+    //        u8g2_DrawStr(&u8g2, 20, 48, "FunctionC");
+    //        u8g2_DrawStr(&u8g2, 20, 64, "FunctionD");
+    //
+    //        u8g2_SendBuffer(&u8g2);
+    //
+    //        // if (loop % 2)
+    //        // {
+    //        //     rt_pin_write(GET_PIN(D, 1), 0);
+    //        //     rt_pin_write(GET_PIN(D, 3), 0);
+    //        //     rt_pin_write(GET_PIN(D, 5), 0);
+    //        // }
+    //        // else
+    //        // {
+    //        //     rt_pin_write(GET_PIN(D, 1), 1);
+    //        //     rt_pin_write(GET_PIN(D, 3), 1);
+    //        //     rt_pin_write(GET_PIN(D, 5), 1);
+    //        // }
+    //
+    //        if (index == 4)
+    //        {
+    //            index = 0;
+    //            u8g2_ClearBuffer(&u8g2);
+    //        }
+    //        rt_thread_mdelay(1000);
+    //    }
 }
 
 MSH_CMD_EXPORT(u8g2_show, u8g2 oled demo show);

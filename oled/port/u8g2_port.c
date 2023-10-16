@@ -98,6 +98,11 @@ uint8_t u8x8_gpio_and_delay_rtthread(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int,
 
         rt_pin_write(u8x8->pins[U8X8_PIN_CS], 0);
         rt_pin_write(u8x8->pins[U8X8_PIN_DC], 0);
+
+        rt_pin_write(u8x8->pins[U8X8_PIN_RESET], 0);
+        rt_thread_mdelay(50);
+        rt_pin_write(u8x8->pins[U8X8_PIN_RESET], 1);
+
         break;
 
     case U8X8_MSG_DELAY_I2C:

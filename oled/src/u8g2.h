@@ -1484,6 +1484,9 @@ typedef int16_t u8g2_long_t; /* introduced for ellipse calculation */
 
     /*==========================================*/
     extern const uint8_t u8g2_font_crox1cb_mf[] U8G2_FONT_SECTION("u8g2_font_crox1cb_mf");
+
+    extern const uint8_t usa[1545] U8G2_FONT_SECTION("usa");
+
     /*==========================================*/
     /* C++ compatible */
 

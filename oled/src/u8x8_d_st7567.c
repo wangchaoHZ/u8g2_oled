@@ -242,7 +242,7 @@ static const u8x8_display_info_t u8x8_st7567_jlx12864_display_info =
         /* write_pulse_width_ns = */ 80, /* */
         /* tile_width = */ 16,           /* width of 16*8=128 pixel */
         /* tile_height = */ 8,
-        /* default_x_offset = */ 4,
+        /* default_x_offset = */ 0,
         /* flipmode_x_offset = */ 0,
         /* pixel_width = */ 128,
         /* pixel_height = */ 64};
@@ -302,11 +302,15 @@ static const uint8_t u8x8_st7567_jlx12864g_6053_pn_init_seq[] = {
     U8X8_START_TRANSFER(), /* enable chip, delay is part of the transfer start */
     U8X8_C(0xe2),
     U8X8_DLY(50),
+    U8X8_C(0x2c),
+    U8X8_DLY(50),
+    U8X8_C(0x2e),
+    U8X8_DLY(50),
     U8X8_C(0x2f),
     U8X8_DLY(50),
     U8X8_C(0x24),
     U8X8_C(0x81),
-    U8X8_C(0x25),
+    U8X8_C(0x20),
     U8X8_C(0xa2),
     U8X8_C(0xc8),
     U8X8_C(0xa0),
