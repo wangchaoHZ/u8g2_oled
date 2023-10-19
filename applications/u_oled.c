@@ -2,7 +2,7 @@
  * @Author       : wang chao
  * @Date         : 2023-08-30 19:09:32
  * @LastEditors  : wang chao
- * @LastEditTime : 2023-10-19 21:27:06
+ * @LastEditTime : 2023-10-19 23:07:13
  * @FilePath     : u_oled.c
  * @Description  :
  * Copyright 2023 BingShan, All Rights Reserved.
@@ -50,42 +50,44 @@ static char cha_buff[128] = {0};
 static char chb_buff[128] = {0};
 static char chc_buff[128] = {0};
 
-void u8g2_charge_show(float v1, float v2)
+void u8g2_init_action_show()
 {
     u8g2_ClearBuffer(&u8g2);
-    // sprintf(cha_buff, "充电");
+    u8g2_DrawUTF8(&u8g2, 6, 16, "等待充电中...");
+}
+
+void u8g2_charge_show()
+{
+    u8g2_ClearBuffer(&u8g2);
     u8g2_DrawUTF8(&u8g2, 6, 16, "充电中...");
-    sprintf(chb_buff, "CH1电流: %0.1fA", v1);
-    u8g2_DrawUTF8(&u8g2, 6, 36, chb_buff);
-    sprintf(chc_buff, "CH2电流: %0.1fA", v2);
-    u8g2_DrawUTF8(&u8g2, 6, 56, chc_buff);
-    u8g2_SendBuffer(&u8g2);
 }
 
-void u8g2_discharge_show(float v1, float v2)
+void u8g2_discharge_show()
 {
     u8g2_ClearBuffer(&u8g2);
-    sprintf(cha_buff, "放电中...");
-    u8g2_DrawUTF8(&u8g2, 6, 16, cha_buff);
-    sprintf(chb_buff, "CH1电流: %0.1fA", v1);
-    u8g2_DrawUTF8(&u8g2, 6, 36, chb_buff);
-    sprintf(chc_buff, "CH2电流: %0.1fA", v2);
-    u8g2_DrawUTF8(&u8g2, 6, 56, chc_buff);
-    u8g2_SendBuffer(&u8g2);
+    // sprintf(cha_buff, "放电中...");
+    u8g2_DrawUTF8(&u8g2, 6, 16, "放电中...");
 }
 
-void u8g2_stewing_show(float v1, float v2, rt_uint8_t direction)
+void u8g2_stewing_show(rt_uint8_t direction)
 {
     u8g2_ClearBuffer(&u8g2);
     if (direction == 1)
     {
-        sprintf(cha_buff, "静置等待放电...");
+        // sprintf(cha_buff, "静置等待放电...");
+        u8g2_DrawUTF8(&u8g2, 6, 16, "静置等待放电...");
     }
     else if (direction == 2)
     {
-        sprintf(cha_buff, "静置等待充电...");
+        // sprintf(cha_buff, "静置等待充电...");
+        u8g2_DrawUTF8(&u8g2, 6, 16, "静置等待充电...");
     }
-    u8g2_DrawUTF8(&u8g2, 6, 16, cha_buff);
+    // u8g2_DrawUTF8(&u8g2, 6, 16, cha_buff);
+}
+
+void u8g2_current_show(float v1, float v2)
+{
+
     sprintf(chb_buff, "CH1电流: %0.1fA", v1);
     u8g2_DrawUTF8(&u8g2, 6, 36, chb_buff);
     sprintf(chc_buff, "CH2电流: %0.1fA", v2);

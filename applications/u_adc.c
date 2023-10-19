@@ -2,7 +2,7 @@
  * @Author       : wang chao
  * @Date         : 2023-10-16 22:53:41
  * @LastEditors  : wang chao
- * @LastEditTime : 2023-10-19 21:26:33
+ * @LastEditTime : 2023-10-19 22:51:43
  * @FilePath     : u_adc.c
  * @Description  :
  * Copyright 2023 BingShan, All Rights Reserved.
@@ -132,9 +132,11 @@ static void do_discharge_wait(void)
     }
 }
 
-extern void u8g2_charge_show(float v1, float v2);
-extern void u8g2_discharge_show(float v1, float v2);
-extern void u8g2_stewing_show(float v1, float v2, rt_uint8_t direction);
+extern void u8g2_init_action_show();
+extern void u8g2_charge_show();
+extern void u8g2_discharge_show();
+extern void u8g2_stewing_show(rt_uint8_t direction);
+extern void u8g2_current_show(float v1, float v2);
 
 void u_adc_detect_thread_entry(void)
 {
@@ -163,15 +165,15 @@ void u_adc_detect_thread_entry(void)
         {
             state_led_ctrl(0);
         }
-        for (loop = 0; loop < 10; loop++)
+        for (loop = 0; loop < 20; loop++)
         {
             adc_value1 += st_get_adc_value(10);
             adc_value2 += st_get_adc_value(11);
             // adc_value3 += st_get_adc_value(12);
             rt_thread_mdelay(10);
         }
-        adc_value1 = adc_value1 / 10;
-        adc_value2 = adc_value2 / 10;
+        adc_value1 = adc_value1 / 20;
+        adc_value2 = adc_value2 / 20;
         // adc_value3 = adc_value3 / 10;
 
         vout1_t = (float)adc_value1 / 4095 * 3.28 * 100 + 6.799999;
@@ -190,10 +192,26 @@ void u_adc_detect_thread_entry(void)
             vout2 = (vout2_t * 2 - 250.0) / 38.5;
         }
 
-        // u8g2_charge_show(f_cur_1, f_cur_2);
+        f_cur_1 = vout1;
+        f_cur_2 = vout2;
 
-         f_cur_1 = vout1;
-         f_cur_2 = vout2;
+        if (f_cur_1 < 0.35)
+        {
+            f_cur_1 = 0.0;
+        }
+        else if (f_cur_1 > 2.0)
+        {
+            f_cur_1 = 2.1;
+        }
+
+        if (f_cur_2 < 0.35)
+        {
+            f_cur_2 = 0.0;
+        }
+        else if (f_cur_2 > 2.0)
+        {
+            f_cur_2 = 2.1;
+        }
 
         // 截止目前读取到了真实的电流数据，接下来做判断
 
@@ -201,31 +219,33 @@ void u_adc_detect_thread_entry(void)
         {
         case INIT_ACTION:
             do_init();
-            u8g2_charge_show(f_cur_1, f_cur_2);
+            u8g2_init_action_show();
             break;
         case CHARGE:
             do_charge();
-            u8g2_charge_show(f_cur_1, f_cur_2);
+            u8g2_charge_show();
             break;
         case WAIT_CHARGE_DONE:
             do_charge_wait();
-            u8g2_stewing_show(f_cur_1, f_cur_2, 1);
+            u8g2_stewing_show(1);
             break;
         case DISCHARGE:
             do_discharge();
-            u8g2_discharge_show(f_cur_1, f_cur_2);
+            u8g2_discharge_show();
             break;
         case WAIT_DISCHARGE_DONE:
             do_discharge_wait();
-            u8g2_stewing_show(f_cur_1, f_cur_2, 2);
+            u8g2_stewing_show(2);
             break;
         }
+        //
+        u8g2_current_show(f_cur_1, f_cur_2);
 
         // LOG_I("adc_value1:%d", (int)vout1_t);
         // LOG_I("adc_value2:%d", (int)vout2_t);
         // LOG_I("adc_value3:%d", (int)vout3_t);
         state_led_ctrl(1);
-        rt_thread_mdelay(100);
+        // rt_thread_mdelay(100);
         if (cnt > 3)
         {
             cnt = 0;
