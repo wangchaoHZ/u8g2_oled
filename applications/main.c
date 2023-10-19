@@ -2,7 +2,7 @@
  * @Author       : wang chao
  * @Date         : 2023-08-30 18:30:30
  * @LastEditors  : wang chao
- * @LastEditTime : 2023-08-30 18:37:45
+ * @LastEditTime : 2023-10-19 20:14:06
  * @FilePath     : main.c
  * @Description  :
  * Copyright 2023 BingShan, All Rights Reserved.
@@ -14,15 +14,17 @@
 #define DBG_LVL DBG_INFO
 #include <rtdbg.h>
 
+extern int u_adc_detect_thread(void);
+
+extern int u_data_thread(void);
+
 int main(void)
 {
-    LOG_I("This is an u8g2 demo on rtt!");
-    LOG_I("SCL Pin: GET_PIN(B, 6)");
-    LOG_I("SDA Pin: GET_PIN(B, 7)");
     rt_thread_mdelay(200);
 
-    extern void u8g2_show(void);
-    u8g2_show();
+    u_adc_detect_thread();
+
+//    u_data_thread();
 
     return RT_EOK;
 }
