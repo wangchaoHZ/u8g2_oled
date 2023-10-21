@@ -2,7 +2,7 @@
  * @Author       : wang chao
  * @Date         : 2023-08-30 19:09:32
  * @LastEditors  : wang chao
- * @LastEditTime : 2023-10-19 23:07:13
+ * @LastEditTime : 2023-10-19 23:29:19
  * @FilePath     : u_oled.c
  * @Description  :
  * Copyright 2023 BingShan, All Rights Reserved.
@@ -65,7 +65,6 @@ void u8g2_charge_show()
 void u8g2_discharge_show()
 {
     u8g2_ClearBuffer(&u8g2);
-    // sprintf(cha_buff, "放电中...");
     u8g2_DrawUTF8(&u8g2, 6, 16, "放电中...");
 }
 
@@ -74,20 +73,16 @@ void u8g2_stewing_show(rt_uint8_t direction)
     u8g2_ClearBuffer(&u8g2);
     if (direction == 1)
     {
-        // sprintf(cha_buff, "静置等待放电...");
         u8g2_DrawUTF8(&u8g2, 6, 16, "静置等待放电...");
     }
     else if (direction == 2)
     {
-        // sprintf(cha_buff, "静置等待充电...");
         u8g2_DrawUTF8(&u8g2, 6, 16, "静置等待充电...");
     }
-    // u8g2_DrawUTF8(&u8g2, 6, 16, cha_buff);
 }
 
 void u8g2_current_show(float v1, float v2)
 {
-
     sprintf(chb_buff, "CH1电流: %0.1fA", v1);
     u8g2_DrawUTF8(&u8g2, 6, 36, chb_buff);
     sprintf(chc_buff, "CH2电流: %0.1fA", v2);
