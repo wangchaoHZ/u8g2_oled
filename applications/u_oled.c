@@ -2,7 +2,7 @@
  * @Author       : wang chao
  * @Date         : 2023-08-30 19:09:32
  * @LastEditors  : wang chao
- * @LastEditTime : 2023-10-19 23:29:19
+ * @LastEditTime : 2023-10-27 14:05:37
  * @FilePath     : u_oled.c
  * @Description  :
  * Copyright 2023 BingShan, All Rights Reserved.
@@ -18,7 +18,6 @@
 #include <rtdbg.h>
 
 #define USING_ST7567_SPI_12864S
-
 #ifdef USING_ST7567_SPI_12864S
 
 // SW Pins 定义
@@ -83,9 +82,9 @@ void u8g2_stewing_show(rt_uint8_t direction)
 
 void u8g2_current_show(float v1, float v2)
 {
-    sprintf(chb_buff, "CH1电流: %0.1fA", v1);
+    sprintf(chb_buff, "CH1电流: %0.1fmA", v1);
     u8g2_DrawUTF8(&u8g2, 6, 36, chb_buff);
-    sprintf(chc_buff, "CH2电流: %0.1fA", v2);
+    sprintf(chc_buff, "CH2电流: %0.1fmA", v2);
     u8g2_DrawUTF8(&u8g2, 6, 56, chc_buff);
     u8g2_SendBuffer(&u8g2);
 }

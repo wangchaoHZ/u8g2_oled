@@ -24,7 +24,7 @@ int main(void)
 
     u_adc_detect_thread();
 
-//    u_data_thread();
+    //    u_data_thread();
 
     return RT_EOK;
 }
